@@ -24,11 +24,11 @@ router.get("/download", (req, res) => {
   }
 });
 
-router.get("/chomps/stores", async (req, res) => {
+router.post("/chomps/stores", async (req, res) => {
   try {
     const { location } = req.body;
-    const stores = await getStores(location);
-    await exportCSV(stores.stores, "csv/chomps.csv");
+    const { stores } = await getStores(location);
+    await exportCSV(stores, "csv/chomps.csv");
 
     console.log("Stores fetched successfully");
     res.json(stores);
